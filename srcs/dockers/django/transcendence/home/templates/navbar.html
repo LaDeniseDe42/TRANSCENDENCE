@@ -1,0 +1,46 @@
+
+<a href="#home" class="navbar-brand spa_redirect" data-section="home">
+  <span class="fw-bold text-secondary text-light fs-3 text"> Pong Game </span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+  <ul class="navbar-nav">
+    <!-- home page constantly accessible -->
+    <li class="nav-item">
+      <a class="nav-link active spa_redirect text-white fw-bold" aria-current="page" href="#home" data-section="home">Home</a>
+    </li>
+    {% if user.is_authenticated %}
+    <!-- pages only available when user is auth -->
+    <li class="nav-item">
+      <a class="nav-link spa_redirect text-white fw-bold " aria-current="page" href="#game" data-section="game">Play</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link spa_redirect text-white fw-bold" aria-current="page" href="#profile" data-section="members/profile">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link spa_redirect text-white fw-bold" aria-current="page" href="#friend" data-section="friend">Friend</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link spa_redirect text-white fw-bold" aria-current="page" href="#history" data-section="history">History</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link spa_redirect text-white fw-bold" aria-current="page" href="#chat" data-section="chat">Chat</a>
+    </li>
+    {% csrf_token %}
+    <li class="nav-item">
+      <a class="nav-link spa_logout text-white fw-bold" aria-current="page" href="#logout" data-section="members/logout">Logout</a>
+    </li>
+    {% else %}
+    <!-- for non-auth users -->
+    <li class="nav-item">
+      <a class="nav-link spa_redirect text-white fw-bold" aria-current="page" href="#login" data-section="members/login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link spa_redirect text-white fw-bold" aria-current="page" href="#register" data-section="members/register">Register</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>

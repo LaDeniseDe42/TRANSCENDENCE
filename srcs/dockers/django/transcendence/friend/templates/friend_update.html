@@ -1,0 +1,45 @@
+<div id="friendList" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+    <ul>
+        {% for friend in request.user.friends.all %}
+        <li class="align-items-start">
+            <a class="spa_redirect text-black loadMe" data-section="members/profile/{{ friend.username }}">{{ friend.username }}</a>
+            <!-- Afficher le statut de l'ami -->
+            {% if friend.is_online %}
+            {% if friend.is_playing %}
+            <span class="status-busy">In Game</span>
+            {% else %}
+            <span class="status-online">Online</span>
+            {% endif %} {% else %}
+            <span class="status-offline">Offline</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="removeList" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+    <label for="removeFriend" class="form-label">Friend to Remove</label>
+    <select class="form-control" id="removeFriend" name="username" required>
+        {% for friend in request.user.friends.all %}
+        <option value="{{ friend.username }}">{{ friend.username }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div id="acceptList" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+    <label for="acceptFriend" class="form-label">Friend to Accept</label>
+    <select class="form-control" id="acceptFriend" name="username" required>
+        {% for guys in request.user.GuysWhoWantToBeMyFriend.all %}
+        <option value="{{ guys.username }}">{{ guys.username }}</option>
+        {% empty %}
+        <option>No friends found.</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div id="buttonAccept">
+    Fuck this! Its, obviously here
+    {% if request.user.GuysWhoWantToBeMyFriend.count > 0 %}
+    <span class="badge bg-danger">{{ request.user.GuysWhoWantToBeMyFriend.count }}</span>
+    {% endif %}
+</div>

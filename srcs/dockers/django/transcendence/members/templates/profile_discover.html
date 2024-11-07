@@ -1,0 +1,80 @@
+<style>
+  .pie-chart {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #71ac44
+        calc(
+          var(--win-percentage) /
+            (var(--win-percentage) + var(--lose-percentage)) * 100%
+        ),
+      #6e0b29 0
+    );
+  }
+
+  /* Cas où il n'y a que des victoires */
+  .pie-chart[style*="--lose-percentage: 0;"] {
+    background: #71ac44;
+  }
+
+  /* Cas où il n'y a que des défaites */
+  .pie-chart[style*="--win-percentage: 0;"] {
+    background: #6e0b29;
+  }
+</style>
+
+<div class="container mt-5 rounded border border-white">
+  <div class="row">
+    <div
+      class="card"
+      style="background-color: rgba(85, 89, 205, 0.7); opacity: 1"
+      tabindex="-1"
+    >
+      <div class="card-header">
+        <h3 class="card-title text-white">Profile</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 col-12" id="informationCol">
+            <div>
+              <h4 class="text-white">Username :</h4>
+              <p id="username" class="text-white">{{ username }}</p>
+            </div>
+            <div>
+              <h4 class="text-white">Email :</h4>
+              <p id="email" class="text-white">{{ email }}</p>
+            </div>
+            <div>
+              <h4 class="text-white">User id :</h4>
+              <p id="user_id" class="text-white">{{ user_id }}</p>
+            </div>
+            {% if total != 0 %}
+            <div class="mb-5">
+              <h4 class="text-white">Statistics</h4>
+              <p class="text-white">{{ nb_won }} WIN / {{ nb_lost }} LOSE</p>
+              <div
+                class="pie-chart"
+                style="--win-percentage: {{ nb_won }}; --lose-percentage: {{ nb_lost }};"
+              ></div>
+            </div>
+            {% endif %}
+          </div>
+          <div class="col-md-6 col-12" id="profilePictureCol">
+            <h4
+              class="justify-content-md-end justify-content-center text-white"
+            >
+              Profile Picture
+            </h4>
+            <img
+              src="{{ avatar }}"
+              alt="Profile picture"
+              class="img-thumbnail img-fluid justify-content-md-end justify-content-center"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

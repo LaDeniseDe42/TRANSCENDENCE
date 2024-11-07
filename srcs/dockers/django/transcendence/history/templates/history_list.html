@@ -1,0 +1,313 @@
+<style>
+  .pie-chart {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #71ac44
+        calc(
+          var(--win-percentage) /
+            (var(--win-percentage) + var(--lose-percentage)) * 100%
+        ),
+      #6e0b29 0
+    );
+  }
+    .camemback {
+      background : rgba(125, 197, 176, 0.5);
+      border : 1px solid #753A1F;
+      border-radius : 10px;
+  }
+
+  /* Cas où il n'y a que des victoires */
+  .pie-chart[style*="--lose-percentage: 0;"] {
+    background: #71ac44;
+  }
+
+  /* Cas où il n'y a que des défaites */
+  .pie-chart[style*="--win-percentage: 0;"] {
+    background: #6e0b29;
+  }
+
+  .statis {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background : #5559CD;
+  }
+  
+</style>
+{% load static %}
+
+<style>
+  #modeFilter {
+  background-color: rgba(85, 89, 205, 1);
+}
+  #worl {
+  background-color: rgba(85, 89, 205, 1);
+}
+</style>
+
+<div class="container mt-5">
+  <h1 class="mb-4 text-white">Game History for <span id="username" class="fw-bold">{{username}}</span></h1>
+
+  <!-- Container pour les historiques -->
+  <div id="historyContainer">
+    {% if history %}
+    <table id="generalTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Total play</th>
+          <th>Win</th>
+          <th>Loose</th>
+          <th>Ratio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="gameMode">All</td>
+          <td id="matchsPlayed">{{ generalstats.total }}</td>
+          <td id="totalWin">{{ generalstats.nb_won }}</td>
+          <td id="totalLoose">{{ generalstats.nb_lost }}</td>
+          <td id="ratio">{{ generalstats.ratio|floatformat:2 }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Formulaire de filtre -->
+    <div class="row">
+      {% if history %}
+      <div class="col-12">
+        <div class="input-group">
+          <select id="modeFilter" class="form-select text-white">
+            <option value="All">All Modes</option>
+            <option value="Bot">Bot</option>
+            <option value="Local">Local</option>ww
+            <option value="Tournament">Tournament</option>
+            <option value="Remote">Remote</option>
+          </select>
+          <select id="worl" class="form-select text-white">
+            <option value="All">Win and lose games</option>
+            <option value="Win">Win games</option>
+            <option value="Lose">Lose games</option>
+          </select>
+          <button
+            onclick="filterHistory()"
+            class="btn btn-secondary"
+            id="filterHistoryBtn"
+          >
+            filter
+          </button>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <table id="historyTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Winner</th>
+          <th>Score W</th>
+          <th>Score L</th>
+          <th>Looser</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in history %}
+        <tr
+          class="mode_{{ entry.get_mode_display }} winner_{{ entry.winner.username|default:entry.name}} loser_{{ entry.looser.username|default:entry.name }}"
+        >
+          <td>{{ entry.get_mode_display }}</td>
+          <td>{{ entry.winner.username|default:entry.name}}</td>
+          <td>{{ entry.scoreW }}</td>
+          <td>{{ entry.scoreL }}</td>
+          <td>{{ entry.looser.username|default:entry.name }}</td>
+          <td>{{ entry.date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">No history found.</div>
+    {% endif %}
+  </div>
+</div>
+{% if generalstats.total != 0 %}
+<div class="container mt-5">
+<div class="mb-5 camemback row" >
+  <h4 class="text-white statis col-12">
+    Statistics
+  </h4>
+  <div class="col-6">
+  <p class="text-black ms-5 fw-bold" id="statsNumber"> {{ generalstats.nb_won }} WIN / {{ generalstats.nb_lost }} LOSE</p>
+  <div
+    id="pieChart"
+    class="pie-chart ms-5"
+    style="--win-percentage: {{ generalstats.nb_won }}; --lose-percentage: {{ generalstats.nb_lost }};">
+  </div>
+  </div>
+  <div class="col-6">
+    <p class="text-black fw-bold">Number of points scored : <span id="pointsScored" class="text-black fw-bold">{{ point.scored }}</span></p>
+    <p class="text-black fw-bold">Number of points take in your face : <span id="pointsTaken" class="text-black fw-bold">{{ point.taken }}</span> </p>
+  </div>
+  
+</div>
+{% endif %}
+</div>{% comment %} <style>
+  .pie-chart {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #71ac44
+        calc(
+          var(--win-percentage) /
+            (var(--win-percentage) + var(--lose-percentage)) * 100%
+        ),
+      #6e0b29 0
+    );
+  }
+    .camemback {
+      background : rgba(125, 197, 176, 0.5);
+      border : 1px solid #753A1F;
+      border-radius : 10px;
+  }
+
+  /* Cas où il n'y a que des victoires */
+  .pie-chart[style*="--lose-percentage: 0;"] {
+    background: #71ac44;
+  }
+
+  /* Cas où il n'y a que des défaites */
+  .pie-chart[style*="--win-percentage: 0;"] {
+    background: #6e0b29;
+  }
+
+  .statis {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background : #5559CD;
+  }
+  
+</style>
+{% load static %}
+
+<style>
+  #modeFilter {
+  background-color: rgba(85, 89, 205, 1);
+}
+  #worl {
+  background-color: rgba(85, 89, 205, 1);
+}
+</style>
+
+<div class="container mt-5">
+  <h1 class="mb-4 text-white">Game History for <span id="username" class="fw-bold">{{username}}</span></h1>
+
+  <!-- Container pour les historiques -->
+  <div id="historyContainer">
+    {% if history %}
+    <table id="generalTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Total play</th>
+          <th>Win</th>
+          <th>Loose</th>
+          <th>Ratio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="gameMode">All</td>
+          <td id="matchsPlayed">{{ generalstats.total }}</td>
+          <td id="totalWin">{{ generalstats.nb_won }}</td>
+          <td id="totalLoose">{{ generalstats.nb_lost }}</td>
+          <td id="ratio">{{ generalstats.ratio|floatformat:2 }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Formulaire de filtre -->
+    <div class="row">
+      {% if history %}
+      <div class="col-12">
+        <div class="input-group">
+          <select id="modeFilter" class="form-select text-white">
+            <option value="All">All Modes</option>
+            <option value="Bot">Bot</option>
+            <option value="Local">Local</option>ww
+            <option value="Tournament">Tournament</option>
+            <option value="Remote">Remote</option>
+          </select>
+          <select id="worl" class="form-select text-white">
+            <option value="All">Win and lose games</option>
+            <option value="Win">Win games</option>
+            <option value="Lose">Lose games</option>
+          </select>
+          <button
+            onclick="filterHistory()"
+            class="btn btn-secondary"
+            id="filterHistoryBtn"
+          >
+            filter
+          </button>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <table id="historyTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Winner</th>
+          <th>Score W</th>
+          <th>Score L</th>
+          <th>Looser</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in history %}
+        <tr
+          class="mode_{{ entry.get_mode_display }} winner_{{ entry.winner.username|default:entry.name}} loser_{{ entry.looser.username|default:entry.name }}"
+        >
+          <td>{{ entry.get_mode_display }}</td>
+          <td>{{ entry.winner.username|default:entry.name}}</td>
+          <td>{{ entry.scoreW }}</td>
+          <td>{{ entry.scoreL }}</td>
+          <td>{{ entry.looser.username|default:entry.name }}</td>
+          <td>{{ entry.date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">No history found.</div>
+    {% endif %}
+  </div>
+</div>
+{% if generalstats.total != 0 %}
+<div class="container mt-5">
+<div class="mb-5 camemback row" >
+  <h4 class="text-white statis col-12">
+    Statistics
+  </h4>
+  <div class="col-6">
+  <p class="text-black ms-5 fw-bold" id="statsNumber"> {{ generalstats.nb_won }} WIN / {{ generalstats.nb_lost }} LOSE</p>
+  <div
+    id="pieChart"
+    class="pie-chart ms-5"
+    style="--win-percentage: {{ generalstats.nb_won }}; --lose-percentage: {{ generalstats.nb_lost }};">
+  </div>
+  </div>
+  <div class="col-6">
+    <p class="text-black fw-bold">Number of points scored : <span id="pointsScored" class="text-black fw-bold">{{ point.scored }}</span></p>
+    <p class="text-black fw-bold">Number of points take in your face : <span id="pointsTaken" class="text-black fw-bold">{{ point.taken }}</span> </p>
+  </div>
+  
+</div>
+{% endif %}
+</div> {% endcomment %}

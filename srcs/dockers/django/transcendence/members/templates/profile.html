@@ -1,0 +1,230 @@
+<style>
+  .pie-chart {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #71AC44
+        calc(
+          var(--win-percentage) /
+            (var(--win-percentage) + var(--lose-percentage)) * 100%
+        ),
+        #6E0B29 0
+    );
+  }
+
+  /* Cas où il n'y a que des victoires */
+  .pie-chart[style*="--lose-percentage: 0;"] {
+    background: #71AC44;
+  }
+
+  /* Cas où il n'y a que des défaites */
+  .pie-chart[style*="--win-percentage: 0;"] {
+    background: #6E0B29 ;
+  }
+</style>
+
+<div class="container mt-5 rounded border border-white">
+  <div
+    class="alert alert-danger alert-dismissible fade show"
+    role="alert"
+    id="errorMessages"
+    style="display: none"
+  ></div>
+  <div class="card-body">
+    <div class="row">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+    <div class="row">
+      <div
+        class="card"
+        style="background-color: rgba(85, 89, 205, 0.7); opacity: 1"
+        tabindex="-1"
+      >
+        <div class="card-header">
+          <h3 class="card-title text-white">Profile</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 col-12" id="informationCol">
+              <div>
+                <h4 class="text-white">Username :</h4>
+                <p class="text-white" id="username">{{ username }}</p>
+              </div>
+              <div>
+                <h4 class="text-white">Email :</h4>
+                <p class="text-white" id="email">{{ email }}</p>
+              </div>
+              <div class="mb-5">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-bs-toggle="modal"
+                  data-bs-target="#changeInformationsModal"
+                  onclick="addEventModal('changeInformationsModal')"
+                >
+                  Change Informations
+                </button>
+              </div>
+              {% if total != 0 %}
+              <div class="mb-5">
+                <h4 class="text-white">
+                  Statistics
+                </h4>
+                <p class="text-white"> {{ nb_won }} WIN / {{ nb_lost }} LOSE</p>
+                <div
+                  class="pie-chart"
+                  style="--win-percentage: {{ nb_won }}; --lose-percentage: {{ nb_lost }};"
+                ></div>
+              </div>
+              {% endif %}
+            </div>
+            <div class="col-md-6 col-12" id="profilePictureCol">
+              <h4
+                class="justify-content-md-end justify-content-center text-white"
+              >
+                Profile Picture
+              </h4>
+              <div id="avatar">
+                <img
+                  src="{{ avatar }}"
+                  alt="Profile picture"
+                  class="img-thumbnail img-fluid justify-content-md-end justify-content-center"
+                />
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change information modal -->
+<div id="modalChangeInformation">
+  <div
+    class="modal modal-lg fade"
+    id="changeInformationsModal"
+    tabindex="-1"
+    aria-labelledby="changeInformationsModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div
+        class="modal-content"
+        style="background-color: rgba(118, 173, 67, 0.8); opacity: 1"
+      >
+        <div class="modal-header">
+          <h5 class="modal-title" id="changeInformationsModalLabel">
+            Change Informations
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="changeInformationsForm" method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="mb-3">
+                  <label for="username">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newUsername"
+                    name="newUsername"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="newEmail"
+                    name="newEmail"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="mb-3">
+                  <label for="profilePicture">Profile Picture</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="profilePicture"
+                    name="profilePicture"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- check if user.intra_id is superior than 0 -->
+            {% if show_password_change %}
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="newPassword1" class="form-label"
+                    >New Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPassword1"
+                    name="newPassword1"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="newPassword2" class="form-label"
+                    >Confirm New Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPassword2"
+                    name="newPassword2"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="currentPassword" class="form-label"
+                    >Current Password *</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="currentPassword"
+                    name="currentPassword"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <p>* : required only if you change password</p>
+            {% endif %}
+            <button
+              type="submit"
+              class="btn btn-primary spa_submit"
+              data-section="members/update_profile"
+              data-bs-dismiss="modal"
+            >
+              Save changes
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

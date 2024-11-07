@@ -1,0 +1,81 @@
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./dockers/nginx
+      dockerfile: Dockerfile
+      args:
+        - DOMAIN_NAME=${SERVER_NAME}
+    ports:
+      - "4433:443"
+    depends_on:
+      - django
+    networks:
+      - transcendence
+    volumes:
+      - static:/vol/static
+      - media:/vol/media
+    env_file:
+      - ".env"
+
+  django:
+    container_name: django
+    build:
+      context: ./dockers/django
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    networks:
+      - transcendence
+    env_file:
+      - .env
+    volumes:
+      - static:/app/transcendence/static
+      - media:/app/transcendence/media
+    depends_on:
+      - postgres
+      - redis
+
+  redis:
+    container_name: redis
+    image: redis:7.0-alpine
+    networks:
+      - transcendence
+    expose:
+      - "6379"
+
+  postgres:
+    container_name: postgres
+    image: postgres:16.3-alpine
+    networks:
+      - transcendence
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    expose:
+      - "5432"
+
+networks:
+  transcendence:
+    driver: bridge
+
+volumes:
+  static:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/goinfre/${USER}/transcendence/static'
+      o: bind
+  media:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/goinfre/${USER}/transcendence/media'
+      o: bind
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/goinfre/${USER}/transcendence/postgres_data'
+      o: bind

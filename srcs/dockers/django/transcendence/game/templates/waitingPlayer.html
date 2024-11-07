@@ -1,0 +1,17 @@
+{% load static %}
+
+<style>
+    .loadingImg {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+</style>
+
+<div class="container rounded border border-white mt-5" style="background-color: rgba(85, 89, 205, 0.7); opacity: 1;" id="waitingBox">
+
+<h1 class="text-white text-center mt-5">En attente de joueurs...</h1>
+<img src="{% static 'images/PongPingPang.gif' %}" alt="loading" class=" loadingImg img-fluid mt-5">
+<p class="text-white text-center mt-5">Veuillez patienter pendant que nous trouvons un adversaire pour vous.</p>
+
+</div>

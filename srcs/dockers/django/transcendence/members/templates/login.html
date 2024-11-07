@@ -1,0 +1,53 @@
+{% load static %}
+<div class="container-fluid g-0 my-3 rounded border border-white" style="max-width:40rem; background-color: rgba(85, 89, 205, 0.7); opacity: 1;"> 
+    <div class="text-center text-light">
+    <h1 class="text-center text-white " style="max-width:40rem; max-height:5rem; line-height:1.5;">LOGIN</h1></div>
+  <br\>
+    <form id="loginForm" method="post">
+      {% if messages %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert">
+            <ul class="messages">
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+            </ul>
+          </div>
+      {% endif %}
+      <div
+		    class="alert alert-danger alert-dismissible fade show"
+		    role="alert"
+		    id="errorMessages"
+		    style="display: none"
+	    ></div>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert" style="display: none;">
+      </div>
+      {% csrf_token %}
+      <div class="mb-3 py-3 mx-5">
+        <label for="userName" class="form-label text-white">USERNAME</label>
+        <input type="text" class="form-control" id="username" name="username" style="max-width: 30rem;" required />
+      </div>
+      <div class="mb-3 py-3 mx-5">
+        <label for="password" class="form-label text-white">PASSWORD</label>
+        <input type="password" class="form-control" id="password" name="password" aria-describedby="mdpHelp" style="max-width: 30rem;" required />
+        <div id="mdpHelp" class="form-text text-white">
+          We'll never share your informations with anyone else.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary spa_submit mx-5 text-white" data-section="members/login">Login</button>
+      </br>
+      </br>
+      <div class="register mx-5" role="alert">
+        <p class="text-white">Not register?  <a href="#register" class="alert-link text-success spa_redirect text-white"
+          data-section="members/register">Sign up here</a></p>
+      </div>
+    </form>
+    <br\>
+    <div class="loginIntra text-center my-3 text-success">
+      <h3 class="text-white">Login with Intra:</h3>
+      <br\>
+      <a href="https://api.intra.42.fr/oauth/authorize?client_id={{ client_id }}&redirect_uri={{ redirect_uri }}&response_type=code&state=a_very_long_random_string_which_must_be_unguessable"
+      class="btn btn-lg my-3">
+      <img class="img-fluid rounded-circle border border-white" src="{% static 'images/42Auth.jpg' %}" alt="Login with 42" style="height: 12rem; width: 20rem;"/></a>
+      </a>
+    </div>
+</div>

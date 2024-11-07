@@ -1,0 +1,83 @@
+{% load static %}
+
+<div class="container container-fluid container-game-mode mt-3 pb-5"
+  style="height: auto; background-color: rgba(85, 89, 205, 0); opacity: 1;">
+  {% if user.is_playing %}
+  <h1 class="text-center game-title my-5 text-white">YOU ARE ALREADY PLAYING</h1>
+  {% else %}
+  <div
+		    class="alert alert-danger alert-dismissible fade show"
+		    role="alert"
+		    id="errorMessages"
+		    style="display: none"
+	    ></div>
+  <h1 class="text-center game-title my-5 text-white">Select The Game Mode</h1>
+  <div class="d-flex flex-wrap justify-content-center gap-3">
+    <div class="d-flex flex-column align-items-center box rounded border border-white"
+      style="width: 18rem; height: 20rem; background-color: rgba(118, 173, 67, 0.5); opacity: 1;">
+      <h5 class="text-center my-2 text-white">Single Player</h5>
+      <a href="#single" class="spa_redirect" data-section="game/single">
+        <img src="{% static 'images/pong4.png' %}" class="card-img-top" alt="...">
+      </a>
+    </div>
+    <div class="d-flex flex-column align-items-center box rounded border border-white"
+      style="width: 18rem; height: 20rem; background-color: rgba(118, 173, 67, 0.5); opacity: 1;">
+      <h5 class="text-center my-2 text-white">Multi Player (Local)</h5>
+      <a href="#multi" class="spa_redirect" data-section="game/multi">
+        <img src="{% static 'images/pong2.webp' %}" class="card-img-top" alt="...">
+      </a>
+    </div>
+    <div class="d-flex flex-column align-items-center box rounded border border-white"
+      style="width: 18rem; height: 20rem; background-color: rgba(118, 173, 67, 0.5); opacity: 1;">
+      <h5 class="text-center my-2 text-white">Multi 4 Player (Local)</h5>
+      <a href="#waiting" class="spa_redirect" data-section="game/multi4">
+        <img src="{% static 'images/pong2.webp' %}" class="card-img-top" alt="...">
+      </a>
+    </div>
+    <div class="d-flex flex-column align-items-center box rounded border border-white"
+      style="width: 18rem; height: 20rem; background-color: rgba(118, 173, 67, 0.5); opacity: 1;">
+      <h5 class="text-center my-2 text-white">Multi Player (Remote)</h5>
+      <a href="#waiting" class="spa_redirect" data-section="game/waiting">
+        <img src="{% static 'images/pong2.webp' %}" class="card-img-top" alt="...">
+      </a>
+    </div>
+    <div class="d-flex flex-column align-items-center box rounded border border-white"
+      style="width: 18rem; height: 20rem; background-color: rgba(118, 173, 67, 0.5); opacity: 1;">
+      <h5 class="text-center my-2 text-white">Tournament</h5>
+      <a href="#" data-bs-toggle="modal" data-bs-target="#joinTournament">
+        <img src="{% static 'images/tournament.png' %}" class="card-img-top" alt="...">
+      </a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+
+<div class="modal fade" id="joinTournament" tabindex="-1" aria-labelledby="joinTournamentLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: rgba(118, 173, 67, 0.8); opacity: 1;">
+      <div class="modal-header">
+        <h5 class="modal-title " id="joinTournamentLabel">Join Tournament</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-white">
+          Merci de choisir votre pseudo pour l'inscription au tournoi
+        </p>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Nickname..." id="tournamentNickName"
+            value="{{ user.tournamentName }}" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Not this time
+        </button>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-secondary" onclick="joinTournament()" data-bs-dismiss="modal">
+          Yes, let's go
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

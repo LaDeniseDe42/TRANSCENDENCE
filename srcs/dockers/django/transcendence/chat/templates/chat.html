@@ -1,0 +1,175 @@
+<style>
+	.status-online {
+		color: green;
+	}
+
+	.status-offline {
+		color: rgb(208, 6, 6);
+	}
+
+	.status-busy {
+		color: rgb(99, 98, 98);
+	}
+
+	.status-unknown {
+		color: black;
+	}
+
+	th {
+		cursor: pointer;
+	}
+
+	.sort-arrow {
+		font-size: 12px;
+		margin-left: 5px;
+	}
+
+	.asc::after {
+		content: "▲";
+	}
+
+	.desc::after {
+		content: "▼";
+	}
+	table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+</style>
+<div class="conatiner mt-5">
+	<div
+		class="alert alert-danger alert-dismissible fade show"
+		role="alert"
+		id="errorMessages"
+		style="display: none"
+	></div>
+	<div class="row justify-content-center">
+		<div
+			class="card text-center col-12"
+			style="width: 70rem; background-color: rgba(85, 89, 205, 0.4); opacity: 1"
+		>
+			<div class="row">
+				<h3 class="card-title col-12 text-start text-white">Join channel</h3>
+				<div class="input-group col-12">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Enter channel name"
+						id="publicChannelNameJoin"
+					/>
+					<button class="btn btn-success" id="joinPublic">Join</button>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<h3 class="card-title col-12 text-start text-white">
+					Chatting Section <span id="tournamentNotif" style="display: none; color:red;">| You have a new tournament notification !</span>
+				</h3>
+				<div class="input-group col-12 mb-1">
+					<select
+						class="form-select"
+						name="select-channel"
+						id="selectChannel"
+					></select>
+				</div>
+				<div class="col-2 text-start">
+					<div
+						class="border border-black rounded bg-light p-1"
+						style="resize: vertical; overflow: auto; height: 300px"
+						id="user-log"
+					></div>
+				</div>
+				<div class="col-10 text-start">
+					<div
+						class="border border-black rounded bg-light p-1"
+						style="resize: vertical; overflow: auto; height: 300px"
+						id="chat-log"
+					></div>
+				</div>
+				<div class="input-group mt-1">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Enter message"
+						id="messageToSend"
+					/>
+					<button class="btn btn-success" id="sendMessage">Send</button>
+					<button
+						class="btn btn-success"
+						id="clearChatLog"
+						onclick="clearChatLog()"
+					>
+						Clear
+					</button>
+					<button
+						class="btn btn-success"
+						id="leaveChannel"
+						onclick="leaveChannelonClick()"
+					>
+						leave channel
+					</button>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<h5 class="card-title col-12 text-start text-white">user filter</h5>
+				<div class="input-group">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Enter username"
+						id="usernameFilter"
+					/>
+					<select class="form-select" name="select-status" id="statusFilter">
+						<option value="all">online/offline/playing</option>
+						<option value="online">online</option>
+						<option value="offline">offline</option>
+						<option value="playing">playing</option>
+					</select>
+					<select class="form-select" name="select-friend" id="friendFilter">
+						<option value="all">friend/not friend</option>
+						<option value="friend">friend</option>
+						<option value="notFriend">not friend</option>
+					</select>
+					<select class="form-select" name="select-mute" id="muteFilter">
+						<option value="all">muted/unmuted</option>
+						<option value="muted">muted</option>
+						<option value="unmuted">unmuted</option>
+					</select>
+					<button
+						class="btn btn-secondary"
+						id="filterButton"
+						onclick="filterUsers()"
+					>
+						Filter
+					</button>
+				</div>
+				<div class="row mt-3">
+					<h5 class="card-title col-12 text-start text-white">User tab</h5>
+					<div class="container input-group" style="overflow: auto; height: 300px">
+						<table class="table table-bordered" id="userTable">
+							<thead>
+								<tr>
+									<th scope="col" onclick="sortTable(0)" style="border-top-left-radius: 10px;">
+										userID <i class="fas fa-sort"></i>
+									</th>
+									<th scope="col" onclick="sortTable(1)">
+										username <i class="fas fa-sort"></i>
+									</th>
+									<th scope="col" onclick="sortTable(2)">
+										is your friend ? <i class="fas fa-sort"></i>
+									</th>
+									<th scope="col" onclick="sortTable(3)">
+										status <i class="fas fa-sort"></i>
+									</th>
+									<th scope="col">privateMessage</th>
+									<th scope="col">mute status</th>
+									<th scope="col" style="border-top-right-radius: 10px;">invite to play</th>
+								</tr>
+							</thead>
+							<tbody id="userLines"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

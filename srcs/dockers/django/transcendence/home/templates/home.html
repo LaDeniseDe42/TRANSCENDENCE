@@ -1,0 +1,53 @@
+{% load static %}
+<div class="row" id="homeText" style="margin-top: 6em;">
+	{% if user.is_authenticated %}
+    <div class="col-12 d-flex justify-content-center">
+        <h1 class="text-white">Welcome <span class="bold " style="color:#32D650;">{{user.username}}</span> to play the Pong!</h1>
+    </div>
+	{% else %}
+	<div class="col-12 justify-content-center">
+        <h1 class="text-center my-3 text-white">Welcome to Play the Pong!</h1>
+		<p class="text-center py-2 fs-4 text-white">To Start Playing You Need to Login!</p>
+    </div>
+	{% endif %}
+
+</div>
+<div class="row" id="buttonLoginOrPlay">
+	<div class="col-12 d-flex justify-content-center">
+		{% if user.is_authenticated %}
+		<button
+			type="button"
+			href="#game"
+			class="spa_redirect btn  btn-lg"
+			data-section="game"
+			style="
+				--bs-btn-font-size: 1.2rem;
+				--bs-btn-hover-bg: #32D650;
+				--bs-btn-hover-color: #fff;
+				--bs-btn-color: #fff;
+				--bs-btn-bg: #745FB2;
+			"
+		>
+			Play !
+		</button>
+		{% else %}
+		<button
+			type="button"
+			href="#login"
+			class="spa_redirect btn btn-lg"
+			data-section="members/login"
+			style="
+				--bs-btn-font-size: 1.2rem;
+				--bs-btn-hover-bg: #32D650;
+				--bs-btn-hover-color: #fff;
+				--bs-btn-color: #fff;
+				--bs-btn-bg: #745FB2;
+
+			"
+		>
+			Login
+		</button>
+		{% endif %}
+	</div>
+</div>
+

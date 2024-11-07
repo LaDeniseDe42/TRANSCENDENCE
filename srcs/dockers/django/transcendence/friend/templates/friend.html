@@ -1,0 +1,126 @@
+{% load static %}
+
+<style>
+    .status-online {
+        color: green;
+    }
+
+    .status-offline {
+        color: rgb(208, 6, 6);
+    }
+
+    .status-busy {
+        color: rgb(99, 98, 98);
+    }
+
+    .status-unknown {
+        color: black;
+    }
+</style>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorMessages" style="display: none"></div>
+<div class="container mt-5 rounded border border-white" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+    <div class="row justify-content-center"  >
+        <div class="col col-md-6 "></div>
+        <div class="card " id="seeMyFriends" tabindex="-1" aria-labelledby="seeMyFriendsLabel" style=" background-color: rgba(85, 89, 205, 0); opacity: 1;"
+            aria-hidden="true">
+            <div class="card-header">
+                <h5 class="text-white" >Manage friends</h5>
+            </div>
+            <div class="mb-3 text-center">
+                <h2 class="text-center text-white">ADD FRIEND</h2>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAFriend" onclick="addEventModal('addAFriend')">just
+                    here</button>
+            </div>
+            <div class="mb-3 text-center">
+                <h2 class="text-center text-white">REMOVE FRIEND</h2>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                    data-bs-target="#removeAfriend" onclick="addEventModal('removeAfriend')">this time is here</button>
+            </div>
+            <div class="mb-3 text-center">
+                <h2 class="text-center text-white">ACCEPT FRIEND</h2>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                    data-bs-target="#acceptAfriend" id="buttonAccept" onclick="addEventModal('acceptAfriend')"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade rounded border border-white" id="addAFriend" tabindex="-1" aria-labelledby="addAFriendLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+                <div class="modal-header ">
+                    <h5 class="modal-title text-white" id="addAFriendLabel">Add Friend</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addFriendForm" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary spa_submit" data-section="friend/add_friend"
+                            data-bs-dismiss="modal">Add Friend</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REMOVE FRIEND -->
+    <div class="modal fade rounded border border-white" id="removeAfriend" tabindex="-1" aria-labelledby="removeAfriendLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+                <div class="modal-header ">
+                    <h5 class="modal-title text-white" id="removeAfriendLabel">Remove Friend</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="removeFriendForm" method="post">
+                        {% csrf_token %}
+                        <div  id="remove_friend_list" class="mb-3">
+                        </div>
+                        <button type="submit" class="btn btn-primary spa_submit" data-section="friend/remove_friend"
+                            data-bs-dismiss="modal">Remove Friend</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ACCEPT FRIEND -->
+    <div class="modal fade rounded border border-white" id="acceptAfriend" tabindex="-1" aria-labelledby="acceptAfriendLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+                <div class="modal-header ">
+                    <h5 class="modal-title text-white" id="acceptAfriendLabel">Accept Friend</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="acceptFriendForm" method="post">
+                        {% csrf_token %}
+                        <div id="accept_friend_list" class="mb-3">
+                        </div>
+                        <button type="submit" class="btn btn-primary spa_submit" data-section="friend/accept_friend"
+                            data-bs-dismiss="modal">Accept Friend</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center" style=" background-color: rgba(85, 89, 205, 0); opacity: 1;">
+            <div class="col-md-6 " style=" background-color: rgba(85, 89, 205, 0); opacity: 1;">
+                <div class="card" id="seeMyFriends" tabindex="-1" aria-labelledby="seeMyFriendsLabel"
+                    aria-hidden="true">
+                    <div class="card-header rounded border border-white" style=" background-color: rgba(85, 89, 205, 0.7); opacity: 1;">
+                        <h5>My Friends</h5>
+                    </div>
+                    <div class="card-body " background-color: rgba(85, 89, 205, 0.7); opacity: 1;  id="friend-section">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+{% load static %}
+<div class="container container-settings mt-3" style="background-color: rgba(118, 173, 67, 0.5); opacity: 1;">
+  <div class="row">
+    <!-- Left Column -->
+    <div class="col-md-6">
+      <div class="container-pace-ball d-flex">
+        <p class="p-3 text-white">Pace of the Ball</p>
+        <button id="decreaseBallPace" class="decrease-ball-pace btn btn-plus btn-success btn-gradient btn-opacity-85 mx-2">-</button>
+        <p id="ballPaceValue" class="count ball-pace-value text-white" style="margin-top: 20px;">10</p>
+        <button id="increaseBallPace" class="increase-ball-pace btn btn-minus btn-success btn-gradient btn-opacity-85 mx-2">+</button>
+      </div>
+      <div class="container-map d-flex">
+        <p class="p-3 text-white">Change Map</p>
+        <button class="p-2 ms-2 btn btn-map btn-map1 btn-success btn-gradient btn-opacity-85">Map1</button>
+        <button class="p-2 ms-2 btn btn-map btn-map2 btn-success btn-gradient btn-opacity-85">Map2</button>
+        <button class="p-2 ms-2 btn btn-map btn-map3 btn-success btn-gradient btn-opacity-85">Map3</button>
+        <button class="p-2 ms-2 btn btn-map btn-map4 btn-success btn-gradient btn-opacity-85">Map4</button>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-md-6">
+      <div class="container-pace-paddles d-flex">
+        <p class="p-3 text-white">Pace of the Paddles</p>
+        <button class="decrease-paddle-pace btn btn-plus btn-success btn-gradient btn-opacity-85 mx-2">-</button>
+        <p class="count paddle-pace-value text-white" style="margin-top: 20px;">10</p>
+        <button class="increase-paddle-pace btn btn-minus btn-success btn-gradient btn-opacity-85 mx-2">+</button>
+      </div>
+      <div class="container-map d-flex">
+        <p class="p-3 text-white">Maximum Score Points</p>
+        <button class="decrease-score-btn btn btn-plus btn-success btn-gradient btn-opacity-85 mx-2">-</button>
+        <p class="count new-score-count text-white" style="margin-top: 20px;" id="newSCoreCount">5</p>
+        <button class="increase-score-btn btn btn-minus btn-success btn-gradient btn-opacity-85 mx-2">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container-game overflow-hidden">
+  <div class="scoreBoard d-flex container-fluid justify-content-between align-items-center">
+    <div class="col text-center text-white" id="usernameSingle">Team1</div>
+    <div class="col text-center text-white" id="player1Score">0</div>
+    <div class="col text-center text-white" id="equalSign">:</div>
+    <div class="col text-center text-white" id="player2Score">0</div>
+    <div class="col text-center text-white" id="usernameBot">Team2</div>
+  </div>
+  <div class="game-container position-relative">
+    <div id="pongGameOverModal" class="game-over-modal d-none container container-fluid position-absolute top-50 start-50 translate-middle">
+      <h1 id="winnerName" class="winner-message"></h1>
+      <button class="btn btn-game-over" id="pongPlayAgainBtn">Play Again</button>
+      <button class="btn btn-game-over" id="pongBackToHomeBtn">Back to Home</button>
+    </div>
+    <div id="startGameModal" class="start-game-modal d-block container container-fluid position-absolute top-50 start-50 translate-middle">
+      <h1>Welcome to Pong Game!</h1>
+      <ul>Controls:
+        <li>
+          Team1:
+          <ul>
+            <li>Player1: W and S</li>
+            <li>Player2 : G and B</li>
+          </ul>
+        </li>
+        <li>
+          Team2:
+          <ul>
+            <li>Player1: &uarr;</span> and &darr;</span></li>
+            <li>Player2: PavNum6 and PavNum3</li>
+          </ul>
+      <p id="scoreDisplay">Score Limit: <span id="newScoreDisplay"></span></p>
+      <p>Map 1: Has no special features.</p>
+      <p>Map 2: The ball can speed up.</p>
+      <p>Map 3: Rain can lower the ball.</p>
+      <p>Map 4: Be careful, a cat might play with the ball.</p>
+      <p>Good Luck!</p>
+      <button class="btn btn-info" id="startGameBtn">Start Game</button>
+    </div>
+    <canvas id="gameBoard" class="gameBoard position-relative mb-5"></canvas>
+  </div>
+</div>

@@ -1,0 +1,285 @@
+
+.box:hover{
+    background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(25,135,84,1) 100%);
+    transition: transform 1s;
+}
+
+
+.game-title{
+    padding-top: 20px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+.canvas{
+    background-color: #111;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #fff;
+
+}
+.game-container {
+    position: relative;
+    width: 100%; 
+    height: 100%; 
+}
+.canvas div{
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    animation: animate 5s linear infinite;
+    background: white;
+    border-radius: 15px;
+    z-index: 1000;
+}
+
+.class-map2{
+    background: url("/static/images/mapgif.gif") no-repeat center center;
+    background-size: cover;
+}
+.class-map3{
+    background: url("/static/images/map3.gif") no-repeat center center;
+    background-size: cover;
+}
+.class-map4{
+    background: url("/static/images/map4.gif") no-repeat center center;
+    background-size: cover;
+}
+
+.start-game-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+    width: 30rem;
+    max-height: 90%;
+}
+.start-game-modal p {
+    margin: 5px 0; /* Reduce the vertical margin */
+    padding: 0; /* Remove any padding */
+}
+
+.game-over-modal{
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+    height: auto;
+    width: 35rem;
+}
+.btn-game-over{
+    padding: 8px 10px;
+}
+
+.scoreBoard{
+    background-color: #111;
+    width: 100%;
+    margin-top: 3rem;
+    padding: 2rem;
+
+}
+
+
+#player1Score, #player2Score, #usernameSingle, #usernameBot{
+    color: white;
+    font-size: 3rem;
+    padding: 1rem;
+}
+
+#equalSign
+{
+    color: white;
+    font-size: clamp(1rem, 5vw, 2rem);
+}
+
+#imgUser, #imgBot{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-top: 1.2rem;
+}
+
+
+/* MULTI */
+
+#gameBoard{
+    background-color: #111;
+    width: 100%;
+    height: auto;
+    border: 2px solid #fff;
+}
+
+.winner-message{
+    font-size: 2rem;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.modal-username-player {
+    color: #2ecc71; 
+}
+
+.modal-username-bot {
+    color: #e74c3c; 
+}
+
+.btn-game-over {
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-game-over:hover {
+    background-color: #2980b9; 
+}
+
+.container-settings{
+    border: 2px solid green;
+}
+.btn-plus, .btn-minus{
+    height: 40px;
+    width: 40px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px; 
+    
+}
+.btn-map{
+    height: 50px;
+    width: 50px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+
+
+
+/* REMOTE */
+
+.container-remote{
+    display: none;
+}
+
+@media (min-width: 1400px){
+}
+@media (max-width: 1200px) and (min-width: 1000px) {
+    #imgUser, #imgBot{
+        width: 80px !important; 
+        height: 80px !important;
+        margin-top: 1.0rem; 
+    }
+    #player1Score, #player2Score, #usernameSingle, #usernameBot, #equalSign  {
+        font-size: 2.5rem; 
+    }
+
+}
+@media (max-width: 1000px) and (min-width: 768px) {
+    #player1Score, #player2Score, #usernameSingle, #usernameBot, #equalSign  {
+        font-size: 2rem; 
+        padding: 1.2rem; 
+    }
+    #imgUser, #imgBot{
+        width: 70px !important; 
+        height: 70px !important;
+        margin-top: 1.0rem; 
+    }
+    .game-over-modal{
+        width: 70%;
+        padding: 15px;
+    }
+    .winner-message{
+        font-size: 1.6rem; 
+        padding: 0.5rem; 
+    }
+    .btn-game-over{
+        font-size: 15px;
+        padding: 7px 10px;
+    }
+}
+@media (max-width: 768px) and (min-width: 576px) {
+    .start-game-modal {
+        width: 70%;
+        padding: 15px;
+    }
+    .translate-middle {
+        transform: translate(-50%,-60%)!important;
+    }
+    .start-game-modal h1 {
+        font-size: 1.5rem;
+    }
+    #player1Score, #player2Score, #usernameSingle, #usernameBot, #equalSign  {
+        font-size: 1.5rem; 
+    }
+    
+    #imgUser, #imgBot{
+        width: 60px !important;
+        height: 60px !important;
+        margin-top: 0.8rem; 
+    }
+    .game-over-modal{
+        width: 70%;
+        padding: 15px;
+    }
+    .winner-message{
+        font-size: 1.1rem; 
+        padding: 0.5rem; 
+    }
+    .btn-game-over{
+        font-size: 15px;
+        padding: 5px 10px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .start-game-modal {
+        width: 70%;
+        padding: 5px;
+    }
+    .start-game-modal h1 {
+        font-size: 1.3rem;
+    }
+    .translate-middle {
+        transform: translate(-50%,-60%)!important;
+    }
+    #player1Score, #player2Score, #usernameSingle, #usernameBot, #equalSign {
+        font-size: 1.3rem;
+        padding: 0.5rem; 
+    }
+    #imgUser, #imgBot{
+        width: 50px !important;
+        height: 50px !important;
+        margin-top: 0.5rem; 
+    }
+    .game-over-modal{
+        width: 70%;
+        padding: 10px;
+    }
+    .winner-message{
+        font-size: 0.9rem; 
+        padding: 0.5rem; 
+    }
+    .btn-game-over{
+        font-size: 15px;
+        padding: 5px 10px;
+    }
+}

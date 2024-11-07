@@ -1,0 +1,75 @@
+<div class="container mt-5 col-12 rounded border border-white" style="max-width:40rem; height:auto; background-color: rgba(85, 89, 205, 0.4); opacity: 1;">
+	<div class="row" style="background-color: rgba(85, 89, 205, 0.4); opacity: 1;" >
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorMessages" style="display: none;">
+        </div>
+		<div class="card g-0 col-12 " style="background-color: rgba(85, 89, 205, 0.4); opacity: 1;" tabindex="-1">
+			<div class="card-header col-12 text-center  text-light">
+				<h3 class="card-title col-12 text-white">Register</h3>
+			</div>
+			<div class="card-body col-12t" style="background-color: rgba(85, 89, 205, 0.4); opacity: 1;">
+				<div class="row">
+                    <form action="POST" id="registerForm">
+                        {% csrf_token %}
+                        <div class="col-12 mb-3">
+                            <label for="username" class="form-label text-white">USERNAME</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="email" class="form-label text-white">E-MAIL</label>
+                            <input type="text" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="password1" class="form-label text-white">PASSWORD</label>
+                            <input type="password" class="form-control" id="password1" name="password1" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="password2" class="form-label text-white">PASSWORD CONFIRMATION</label>
+                            <input type="password" class="form-control" id="password2" name="password2" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <button type="submit" class="btn btn-primary spa_submit text-white" data-section="members/register">Register</button>
+                        </div>
+                    </form>
+                </div>
+			</div>
+		</div>
+	</div>
+</div> 
+
+<!-- <div class="container mt-5">
+	<div class="row">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorMessages" style="display: none;">
+        </div>
+		<div class="card col-12" tabindex="-1">
+			<div class="card-header bg-secondary text-light">
+				<h3 class="card-title">Register</h3>
+			</div>
+			<div class="card-body bg-light">
+				<div class="row">
+                    <form action="POST" id="registerForm">
+                        {% csrf_token %}
+                        <div class="col-12 mb-3">
+                            <label for="username" class="form-label text-dark">USERNAME</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="email" class="form-label text-dark">E-MAIL</label>
+                            <input type="text" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="password1" class="form-label text-dark">PASSWORD</label>
+                            <input type="password" class="form-control" id="password1" name="password1" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="password2" class="form-label text-dark">PASSWORD CONFIRMATION</label>
+                            <input type="password" class="form-control" id="password2" name="password2" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <button type="submit" class="btn btn-primary spa_submit" data-section="members/register">Register</button>
+                        </div>
+                    </form>
+                </div>
+			</div>
+		</div>
+	</div>
+</div> -->

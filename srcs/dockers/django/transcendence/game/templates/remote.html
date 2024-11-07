@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h2 class="text-white">Welcome to the room dear <strong>{{ username }} </strong></h2>
+        </div>
+    </div>
+</div>
+
+{% if username == p1 %}
+    <style>
+        #gameBoard {
+                background: url('/static/images/HEMAN.gif') no-repeat center center;
+                background-size: cover;
+        }
+    </style>
+{% else %}
+    <style>
+        #gameBoard {
+                background: url('/static/images/heman.gif') no-repeat center center;
+                background-size: cover;
+        }
+    </style>
+{% endif %}
+
+<div class="container container-game">
+    <div class="scoreBoard d-flex justify-content-evenly">
+        <div id="player1">
+            <h2 id="player1Name" class="text-danger uppercase">{{ p1 }} </h2>
+            <span id="player1Score">0</span>
+        </div>
+        <div id="equalSign">:</div>
+        <div id="player2">
+            <h2 id="player2Name" class="text-danger uppercase">{{ p2 }} </h2>
+            <span id="player2Score">0</span>
+        </div>
+    </div>
+    <h1 id="countdownd" class="text-center" style="font-size: 2em; color: red;"> LA PARTIE COMMENCE DANS : </h1>
+    <h2 id="countdown" class="text-center" style="font-size: 2em; color: red;"> </h2>
+    <div class="row">
+            <canvas id="gameBoard" ></canvas>
+    </div> 
+</div>
