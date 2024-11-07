@@ -1,6 +1,14 @@
 # Bienvenue sur le dépôt GitHub du projet Transcendence !
 ### Ce site permet aux utilisateurs de jouer à Pong entre eux en temps réel, d'utiliser un chat et de participer à des parties multijoueurs en ligne.
 
+## APERCU
+
+<div>
+  <img src="screenshot/T1.png" width="400" height="200">
+  <img src="screenshot/Tgame.png" width="400" height="200">
+  <img src="screenshot/Tpong.png" width="400" height="200">
+<div>
+
 ## Installation et lancement:
 
 Avant de vouloir compiler le projet, assurez vous d'avoir docker installe.
