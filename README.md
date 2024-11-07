@@ -1,6 +1,8 @@
 # Bienvenue sur le dépôt GitHub du projet Transcendence !
 ### Ce site permet aux utilisateurs de jouer à Pong entre eux en temps réel, d'utiliser un chat et de participer à des parties multijoueurs en ligne ou seul contre un bot.
 
+Ce projet a ete realise en collaboration avec [iamdamla](https://github.com/iamdamla), [ChromaXard](https://github.com/ChromaXard) et [alexandre6795](https://github.com/alexandre6795)
+
 ## APERCU
 
 <div>
