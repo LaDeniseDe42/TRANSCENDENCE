@@ -7,6 +7,8 @@
   <img src="screenshot/T1.png" width="400" height="200">
   <img src="screenshot/Tgame.png" width="400" height="200">
   <img src="screenshot/Tpong.png" width="400" height="200">
+  <img src="screenshot/Tchat.png" width="400" height="200">
+  <img src="screenshot/Tremote.png" width="400" height="200">
 <div>
 
 ## Installation et lancement:
