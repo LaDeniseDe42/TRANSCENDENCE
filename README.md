@@ -43,4 +43,12 @@ Une fois l'environnemet cree et ajoute au projet, il vous suffit a la racine de 
 'make'
 ``` 
 pour lancer le projet. 
-POUR LE MOMENT le projet a ete concu pour fonctionner uniquement sur les postes de l'ecole 42. 
+
+Ensuite il suffit de se rendre sur le navigateur Firefox ou Google Chrome et rentre l'url suivant :
+
+```
+https://[ADRESSE IP]:4433
+```
+Vous pouvez directement trouve le bon URL en regardant dans le fichier .env cree a la compilation.
+
+
