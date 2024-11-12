@@ -65,17 +65,17 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: '/goinfre/${USER}/transcendence/static'
+      device: '~/transcendence/static'
       o: bind
   media:
     driver: local
     driver_opts:
       type: none
-      device: '/goinfre/${USER}/transcendence/media'
+      device: '~/transcendence/media'
       o: bind
   postgres_data:
     driver: local
     driver_opts:
       type: none
-      device: '/goinfre/${USER}/transcendence/postgres_data'
+      device: '~/transcendence/postgres_data'
       o: bind

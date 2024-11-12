@@ -168,6 +168,8 @@ def loginPage(request):
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             if request.user.is_authenticated:
                 return redirect('home')
+            if settings.INTRA_42_CLIENT_ID == "":
+                return render(request, 'login.html')
             intra_creds = {
                 'redirect_uri': reformat_uri(settings.INTRA_42_REDIRECT_URI),
                 'client_id': settings.INTRA_42_CLIENT_ID

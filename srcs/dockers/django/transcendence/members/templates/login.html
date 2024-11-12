@@ -42,6 +42,7 @@
       </div>
     </form>
     <br\>
+    {% if client_id %}
     <div class="loginIntra text-center my-3 text-success">
       <h3 class="text-white">Login with Intra:</h3>
       <br\>
@@ -50,4 +51,5 @@
       <img class="img-fluid rounded-circle border border-white" src="{% static 'images/42Auth.jpg' %}" alt="Login with 42" style="height: 12rem; width: 20rem;"/></a>
       </a>
     </div>
+    {% endif %}
 </div>
